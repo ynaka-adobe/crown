@@ -140,10 +140,11 @@ function decorateNavItem(li) {
 function decorateBrandSection(section) {
   section.classList.add('brand-section');
   const brandLink = section.querySelector('a');
+  if (!brandLink) return;
   const [, text] = brandLink.childNodes;
   const span = document.createElement('span');
   span.className = 'brand-text';
-  span.append(text);
+  span.append(text || '');
   brandLink.append(span);
 }
 
@@ -192,6 +193,9 @@ export default async function init(el) {
     await decorateHeader(fragment);
     el.append(fragment);
   } catch (e) {
-    throw Error(e);
+    const { log } = getConfig();
+    log(e, el);
+    document.body.classList.add('no-header');
+    el.remove();
   }
 }
