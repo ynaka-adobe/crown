@@ -85,7 +85,7 @@
     box-sizing: border-box;
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 
@@ -147,9 +147,17 @@
   }
 
   &.center {
+    --min-height: 250px;
+
     .hero-foreground {
       justify-content: center;
+      align-items: center;
       text-align: center;
+
+      .fg-text {
+        margin-inline: auto;
+        text-align: center;
+      }
     }
   }
 }
@@ -173,6 +181,13 @@
     &.center {
       .hero-foreground {
         display: flex;
+
+        .fg-text {
+          width: fit-content;
+          max-width: var(--grid-container-width);
+          margin-inline: auto;
+          text-align: center;
+        }
       }
     }
 
@@ -222,4 +237,9 @@
       grid-template-columns: 33% 33%;
     }
   }
+}
+
+/* Move hero copy up by 100px - for heroes with video background */
+.hero:has(.hero-background video) .hero-foreground {
+  margin-top: -50px;
 }

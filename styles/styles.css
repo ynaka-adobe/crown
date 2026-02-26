@@ -360,7 +360,11 @@ svg {
 
 /* @media (width >= 600px) {} */
 
-/* @media (width >= 900px) {} */
+@media (width >= 900px) {
+  :root {
+    --header-height: 50px; /* logo row + nav row */
+  }
+}
 
 /* @media (width >= 1200px) {} */
 
