@@ -1,0 +1,67 @@
+---
+description: Tips for creating and modifying blocks to avoid trial and error
+globs: blocks/**/*.css
+alwaysApply: false
+---
+
+# Block Creation Tips
+
+Lessons from the hero center variant work. Apply these when creating or modifying block variants.
+
+## 1. Understand the Block's CSS Architecture First
+
+- **Scan for custom properties** at the block root (e.g. `--min-height`, `--gradient-start`). Variants typically override these.
+- **Trace how layout changes across breakpoints**—base styles often switch layout (e.g. flex → grid) in media queries.
+- **Child selectors inherit parent overrides**—media queries may unset base values (e.g. `.fg-text { width: unset; margin: unset }`). Variants must re-apply what they need.
+
+## 2. Sizing Variants via Custom Properties
+
+Blocks that use `--min-height`, `--max-width`, etc. for layout: add variant overrides at the block level, not on nested elements.
+
+```css
+/* ✅ Right place */
+&.center {
+  --min-height: 250px;
+}
+
+/* ❌ Wrong—won't affect elements using var(--min-height) */
+&.center .hero-foreground {
+  min-height: 250px; /* Redundant if parent uses var() */
+}
+```
+
+## 3. Centered Copy Layout
+
+For horizontally centered copy, avoid `width: 100%` on the text container—it makes the block span full width so it can't visually center.
+
+```css
+/* ✅ Block shrinks to content and centers */
+.fg-text {
+  width: fit-content;
+  max-width: var(--grid-container-width);
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* ❌ Block spans full width; only text-align centers the text */
+.fg-text {
+  width: 100%;
+  margin-inline: auto; /* No effect when width is 100% */
+}
+```
+
+## 4. Variant + Breakpoint Interaction
+
+Base styles are often overridden in media queries. Variant styles must account for those overrides.
+
+- Read base styles, then media query overrides.
+- Add variant-specific rules inside the same media query when the variant needs different behavior.
+- Explicitly override inherited/unset values (e.g. `width`, `margin`) in the variant.
+
+## 5. Checklist for Centered Variants
+
+- [ ] Container: `justify-content: center` and `align-items: center`
+- [ ] Text block: `width: fit-content` (or similar) so it can center
+- [ ] Text block: `margin-inline: auto` and `max-width` for constraint
+- [ ] Text: `text-align: center` (on block or inherited)
+- [ ] All breakpoints: verify layout at each media query

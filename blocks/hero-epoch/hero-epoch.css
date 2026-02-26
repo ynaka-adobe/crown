@@ -1,0 +1,108 @@
+.hero-epoch {
+  --min-height: 250px;
+  --gradient-start: rgb(var(--color-dark-base) / 80%);
+  --gradient-end: rgb(var(--color-dark-base) / 20%);
+  /* Epoch design: Figma Epoch/Desktop/Launch/Landing */
+  --hero-epoch-text-color: rgb(232 231 222);
+  --hero-epoch-tagline-size: 28px;
+
+  position: relative;
+  color: var(--hero-epoch-text-color);
+  overflow: hidden;
+}
+
+.hero-epoch .hero-epoch-background {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-epoch .hero-epoch-background picture {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-epoch .hero-epoch-background img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-epoch .hero-epoch-background > div {
+  background-color: var(--color-background);
+  position: absolute;
+  inset: 0;
+}
+
+.hero-epoch .hero-epoch-background video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-epoch .hero-epoch-foreground {
+  min-height: var(--min-height);
+  padding: var(--spacing-xxl) 0;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-l);
+  background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.hero-epoch .hero-epoch-foreground p {
+  margin: 8px 0;
+}
+
+.hero-epoch .hero-epoch-foreground .hero-epoch-text {
+  width: fit-content;
+  max-width: var(--grid-container-width);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero-epoch .hero-epoch-foreground div > *:first-child {
+  margin-top: 0;
+}
+
+.hero-epoch .hero-epoch-foreground div > *:last-child {
+  margin-bottom: 0;
+}
+
+.hero-epoch .hero-epoch-detail {
+  margin: 0;
+  font-size: var(--hero-epoch-tagline-size);
+  font-weight: 400;
+}
+
+.hero-epoch .hero-epoch-heading {
+  margin: 0;
+}
+
+/* Button group: two CTAs, space-between (Figma: Justify) */
+.hero-epoch .hero-epoch-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-m);
+}
+
+.hero-epoch .hero-epoch-buttons a {
+  text-decoration: none;
+}
+
+/* Full viewport variant (Figma: 1440x900 desktop landing) */
+.hero-epoch.full {
+  --min-height: calc(100vh - var(--header-height, 0px));
+}
+
+/* Light variant */
+.hero-epoch.light {
+  --gradient-start: rgb(var(--color-light-base) / 80%);
+  color: var(--color-dark);
+}
