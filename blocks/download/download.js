@@ -32,9 +32,11 @@ function buildTable(data) {
       if (col === 'Link' && val) {
         const a = document.createElement('a');
         a.href = val;
-        a.textContent = val;
+        a.textContent = 'Download';
+        a.className = 'download-action';
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
+        a.download = '';
         td.append(a);
       } else {
         td.textContent = val ?? '';
